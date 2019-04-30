@@ -1,3 +1,8 @@
+<?php
+    session_start(); 
+    include("../Database/config.php");
+    include("../Core/LoginandRegister.php");
+?>
 <html>
 <header>
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
@@ -13,9 +18,9 @@
     <ul>
         <li><a href="/Web-assignment/index.php">Home Page</a></li>
         <?php
-        if ((isset($_SESSION['login']) && $_SESSION['login'] != '')) {
+        if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
             echo "<li><a href='/Web-assignment/Profile/photoUpload.php'>Photo</a></li>";
-            echo "<li><a href='/Web-assignment/Login/logout.php'>Log out</a>";
+            echo "<li><a href='/Web-assignment/Login/Logout.php'>Logout</a>";
         }
         else {
             echo "<li><a href='/Web-assignment/Login/SignIn.php'>Sign In</a>";
