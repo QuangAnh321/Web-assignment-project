@@ -2,10 +2,8 @@
 <title>HOME PAGE</title>
 <link rel="stylesheet" href="Asset/css/style.css">
 
-    
-    <div class="content">
-    <?php if (isset($_SESSION['success'])) : ?>
-    <div class="error success" >
+<?php if (isset($_SESSION['success'])) : ?>
+    <div class="success" >
       	<h3>
           <?php 
           	echo $_SESSION['success']; 
@@ -13,7 +11,8 @@
           ?>
       	</h3>
       </div>
-  	<?php endif ?>
+  	<?php endif ?>  
+    <div class="content">
         <ul>
             <li>
                 <a><img src="Asset/image/avatar"></a>

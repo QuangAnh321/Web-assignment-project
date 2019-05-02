@@ -1,25 +1,28 @@
 <?php
-    include "../Components/header.php"
+    require_once("../Database/config.php");
+    require_once("../Core/Photos.php");
+    include "../Components/header.php";
 ?>
 <title>Photo Upload</title>
 <link rel="stylesheet" href="../Asset/css/style.css">
-
 <div class="photo">
     <fieldset>
         <legend>Create Photo</legend>
         <div class="content">
-            <ul>
-                <li style="width: 250px; text-align: center">Name:</li>
-                <li style="width: 900px"><input type="text" name="name"></li>
-                <li style="width: 250px; text-align: center">Tag: </li>
-                <li style="width: 900px"><input type="text" name="tag"></li>
-                <li style="width: 50px"><input type="submit" name="add" value="ADD"></li>
-                <li style="width: 250px; text-align: center">Description: </li>
-                <li style="width: 900px"><textarea name="tag"></textarea></li>
-                <li style="width: 250px; text-align: center">Image: </li>
-                <li style="width: 900px"><input type="file" name="image"></li>
-                <li style="width: 150px"><input type="submit" name="add" value="CREATE" class="create"></li>
-            </ul>
+                <ul>
+                    <form action="photoUpload.php" class="photoForm" method="post" enctype="multipart/form-data">
+                        <li style="width: 250px; text-align: center">Name:</li>
+                        <li style="width: 900px"><input type="text" name="name" placeholder="Photo name" required></li>
+                        <li style="width: 250px; text-align: center">Tag: </li>
+                        <li style="width: 900px"><input type="text" name="tag" placeholder="Each tag seperate by a whitespace" required></li>
+                        <li style="width: 250px; text-align: center">Description: </li>
+                        <li style="width: 900px"><textarea name="description" required></textarea></li>
+                        <li style="width: 250px; text-align: center">Image: </li>
+                        <li style="width: 900px"><input type="file" name="image"></li>
+                        <li style="width: 150px"><input type="submit" name="addPhoto" value="CREATE" class="create"></li>
+                    <form>
+                </ul>
+            </form>
         </div>
     </fieldset>
 </div>
@@ -42,7 +45,7 @@
                 DESCRIPTION
             </li>
         </ul>
-        <a class="link" href="/Profile/fixPhoto.php"><i class="fas fa-tools"></i></a>
+        <a class="link" href="../Profile/fixPhoto.php"><i class="fas fa-tools"></i></a>
     </div>
 </div>
 

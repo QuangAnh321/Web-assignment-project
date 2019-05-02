@@ -19,6 +19,7 @@
         <li><a href="/Web-assignment/index.php">Home Page</a></li>
         <?php
         if ((isset($_SESSION['username']) && $_SESSION['username'] != '')) {
+            echo "<li>Hello: ".$_SESSION['username']."</li>";
             echo "<li><a href='/Web-assignment/Profile/photoUpload.php'>Photo</a></li>";
             echo "<li><a href='/Web-assignment/Login/Logout.php'>Logout</a>";
         }
@@ -29,7 +30,7 @@
         }
         ?>
         <li>
-            <input type="text" name="search" value="search">
+            <input type="text" name="search" placeholder="Search for photos">
         </li>
     </ul>
 

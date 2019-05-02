@@ -40,7 +40,7 @@ h3{
 
 
 .menu {
-    width: 80%;
+    width: 1300px;
     background-color: #ffffff;
     margin: auto;
     margin-bottom: 50px;
@@ -92,7 +92,7 @@ h3{
 }
 
 .content ul li{
-    width: 300px;
+    width: 260px;
     float: left;
     /*width: 20%;*/
     margin: 10px 12px;
@@ -257,3 +257,16 @@ textarea {
     background: white;
 
 }
+
+.photoForm {
+    display:inline;
+}
+
+.error { 
+    color: #a94442; 
+  }
+
+  .success {
+    color: #3c763d; 
+    text-align: center
+  }
