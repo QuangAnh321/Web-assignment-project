@@ -12,11 +12,11 @@
                 <ul>
                     <form action="photoUpload.php" class="photoForm" method="post" enctype="multipart/form-data">
                         <li style="width: 250px; text-align: center">Name:</li>
-                        <li style="width: 900px"><input type="text" name="name" placeholder="Photo name" required></li>
+                        <li style="width: 900px"><input type="text" name="photo_name" placeholder="Photo name" required></li>
                         <li style="width: 250px; text-align: center">Tag: </li>
-                        <li style="width: 900px"><input type="text" name="tag" placeholder="Each tag seperate by a whitespace" required></li>
+                        <li style="width: 900px"><input type="text" name="photo_tag" placeholder="Each tag seperate by a whitespace" required></li>
                         <li style="width: 250px; text-align: center">Description: </li>
-                        <li style="width: 900px"><textarea name="description" required></textarea></li>
+                        <li style="width: 900px"><textarea name="photo_description" required></textarea></li>
                         <li style="width: 250px; text-align: center">Image: </li>
                         <li style="width: 900px"><input type="file" name="image"></li>
                         <li style="width: 150px"><input type="submit" name="addPhoto" value="CREATE" class="create"></li>
@@ -28,7 +28,7 @@
 </div>
 
 
-<div class="photo">
+<!-- <div class="photo">
     <h3>
         Username
     </h3>
@@ -47,7 +47,7 @@
         </ul>
         <a class="link" href="../Profile/fixPhoto.php"><i class="fas fa-tools"></i></a>
     </div>
-</div>
+</div> -->
 
 <?php
     include "../Components/footer.php"

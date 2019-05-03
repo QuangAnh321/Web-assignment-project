@@ -1,14 +1,18 @@
 <?php
 require("../Database/config.php");
 session_start();
-$errors = array(); 
-if(isset($_POST["addPhoto"]) && isset($_FILES['image'])){
-      $name = mysqli_escape_string($_POST["name"]);
-      $allTags = mysqli_escape_string($_POST["tag"]);
-      $description = mysqli_escape_string($_POST["description"]);
+$errors = array();
+// Show code error (if any)
+// ini_set('display_errors',1);
+// error_reporting(E_ALL);
 
-      // Ger user id (dang loi)
-      $getUserNameQuery = "SELECT user_id from users WHERE user_name =".$_SESSION['username'];
+if(isset($_POST["addPhoto"]) && isset($_FILES['image'])){
+      $name = mysqli_escape_string($conn, $_POST["photo_name"]);
+      $allTags = mysqli_escape_string($conn, $_POST["photo_tag"]);
+      $description = mysqli_escape_string($conn, $_POST["photo_description"]);
+
+      // Get current user id 
+      $getUserNameQuery = "SELECT user_id from users WHERE user_name = '".$_SESSION['username']."'";
       $result = mysqli_query($conn,  $getUserNameQuery);
       $row = mysqli_fetch_assoc($result);
       $user_id = $row["user_id"];
@@ -27,42 +31,54 @@ if(isset($_POST["addPhoto"]) && isset($_FILES['image'])){
       } else if ($file_size > 2097152) {
         array_push($errors, "File size must be lower than 2MB");
       } else {
-         $path = "/var/www/html/Web-assignment/";
+         /*Dear teacher: If you want to test our submission, you may want to change the "/var/www/html" part 
+         in the $path variable to something suitable. For example, you will need to change it 
+         to C:/xampp/htdocs if you test our submission using xmapp on windows.
+         */
+         $path = "/var/www/html/Web-assignment/image/";
          $localPath = $path.$file_name;
          if (is_dir($path)) {
             @mkdir($path, 0777, true);
          }
          move_uploaded_file($file_tmp, $localPath);
-         $insertPhotoQuery = "INSERT INTO photos(photo_title, photo_description, user_id, photo_dir) VALUES('$name', '$description', '$user_id', '$localPath')";
-         $photo_id = mysqli_insert_id($conn);
-            if (mysqli_query($conn, $insertPhotoQuery)) {               
-                echo "success";
+         $locaPathinDB = "/Web-assignment/image/".$file_name;
+         $insertPhotoQuery = "INSERT INTO photos(photo_title, photo_description, user_id, photo_dir) VALUES('$name', '$description', '$user_id', '$locaPathinDB')";  
+            if (mysqli_query($conn, $insertPhotoQuery)) {     
+               $photo_id = mysqli_insert_id($conn);        
             } else {
-                echo "failed";
-                var_dump($user_id);
+               // currently empty, for error diagnostic only
             }
       }
 
       // Tag handling
-      $tagArray = explode(",", $allTags);
+      $tagArray = explode(", ", $allTags);
+      $allTagid = array();
       // check if the tag already exists
       foreach($tagArray as $aTag) {
-         $checkTagQuery = "SELECT * FROM tags WHERE 'tag_name'='.$aTag.' LIMIT 1";
+         $checkTagQuery = "SELECT * FROM tags WHERE tag_name ='".$aTag."' LIMIT 1";
          $tagResult = mysqli_query($conn, $checkTagQuery);
-         if ($tagResult == 0) {
-            $insertTagQuery = "INSERT INTO tags(tag_name) VALUES ('$aTag')";
-            mysqli_query($conn, $$insertTagQuery);
+         $tag = mysqli_fetch_assoc($tagResult);
+         if ($tag == null) {
+            $insertTagQuery = "INSERT INTO tags(tag_name) VALUES ('".$aTag."')";
+            mysqli_query($conn, $insertTagQuery);
             // get the last id inserted
             $tag_id = mysqli_insert_id($conn);
+            array_push($allTagid, $tag_id);
          } else {
             // if found, get it's id
-            $tag = mysqli_fetch_assoc($checkTag);
-            $tag_id = $tag[0]['id'];
+            $tag_id = $tag['tag_id'];
+            array_push($allTagid, $tag_id);
          }
       }
-
-      $insertTagPhotoQuery = "INSERT INTO tag_photo(photo_id, tag_id) VALUES ('.$photo_id.', '.$tag_id.')";
+   
+      $query_values = array();
+      $insertTagPhotoQuery = "INSERT INTO tag_photo(photo_id, tag_id) VALUES ";
+      foreach ($allTagid as $aTagid) {
+         array_push($query_values, "('".$photo_id."', '".$aTagid."')");
+      }
+      $valuesPart = implode(",", $query_values);
+      $insertTagPhotoQuery .= $valuesPart;
+      var_dump($insertTagPhotoQuery);
       mysqli_query($conn, $insertTagPhotoQuery);
-      
    }
 ?>
