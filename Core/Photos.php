@@ -78,7 +78,6 @@ if(isset($_POST["addPhoto"]) && isset($_FILES['image'])){
       }
       $valuesPart = implode(",", $query_values);
       $insertTagPhotoQuery .= $valuesPart;
-      var_dump($insertTagPhotoQuery);
       mysqli_query($conn, $insertTagPhotoQuery);
    }
 ?>
