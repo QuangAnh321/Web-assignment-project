@@ -80,13 +80,23 @@ h3{
     margin: auto;
     background-color: white;
     padding: 35px 0;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
+.contentSingle{
+    width: 1300px;
+    margin: auto;
+    background-color: white;
+    padding: 35px 0;
+
 }
 
 .content ul{
     width: 100%;
     list-style-type: none;
     margin: 0;
-    padding: 30px 0;
+    padding: 0px 0;
     overflow: hidden;
     background-color: white;
 }
@@ -183,8 +193,8 @@ p {
 }
 
 img{
-    width:300px;
-    margin: 10px 0;
+    width:500px;
+    margin: 10px ;
     border-radius: 5px;
 }
 

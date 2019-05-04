@@ -26,7 +26,9 @@
         <?php foreach($photos as $photo) : ?>
             <ul>
                 <li>
-                    <img src="<?php echo $photo["photo_dir"]; ?>">
+                    <a href="singlePhoto.php?id=<?php echo $photo["photo_id"] ?>">
+                        <img src="<?php echo $photo["photo_dir"]; ?>">
+                    </a>
                 </li>
             </ul>
         <?php endforeach; ?>
