@@ -1,7 +1,7 @@
 <?php
 
-const BASE_URL = "http://localhost/Meow2/";
-const ROOT = "/Meow2"; // Let's this empty on real host
+const BASE_URL = "http://localhost/Web-assignment/";
+const ROOT = "/Web-assignment"; // Let's this empty on real host
 
 
 ?>

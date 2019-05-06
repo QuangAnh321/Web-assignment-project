@@ -1,7 +1,7 @@
 <?php
 
 // Lớp database
-class HuyDB
+class DB
 {
 	// Các biến thông tin kết nối
 	private $hostname = 'localhost',
