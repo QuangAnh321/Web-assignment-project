@@ -8,6 +8,8 @@ Init.php luôn phải được gọi ở đầu mỗi file nếu file đó có l
 index.php nhận request, tách các phần path và parameter của GET (nếu có)
 -> từ path kiểm tra trong route.php xem match với đường dẫn nào để gọi ra file php tương ứng
 
+**Sửa BASE_URL trong file config.php thành url mặc định của web ex: "http://hh.com/" , "http://localhost/meow/" **
+**Với host thật không cần điền giá trị cho ROOT, với localhost điền tên thư mục chứa web ex: "/meow" **
 **Không nên đặt tên router trùng tên thư mục**
 **thư viện tự dev bằng code thuần** 
 **project chưa áp dụng mvc**
